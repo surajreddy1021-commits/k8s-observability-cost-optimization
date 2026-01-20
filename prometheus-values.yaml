@@ -1,0 +1,13 @@
+# Configuration for Prometheus Helm Chart
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ['job']
+      receiver: 'slack-notifications'
+    receivers:
+    - name: 'slack-notifications'
+      slack_configs:
+      - api_url: 'https://hooks.slack.com/services/T0000/B0000'
+        channel: '#alerts'
