@@ -1,0 +1,18 @@
+# Logic for automated, cost-effective scaling
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: "karpenter.sh/capacity-type" # Use Spot instances for cost savings
+      operator: In
+      values: ["spot"]
+    - key: "kubernetes.io/arch"
+      operator: In
+      values: ["amd64"]
+  limits:
+    resources:
+      cpu: 1000
+  providerRef:
+    name: default
